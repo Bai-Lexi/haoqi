@@ -4,14 +4,14 @@ window.eruptSiteConfig = {
     //附件地址，一般情况下不需要指定，如果自定义对象存储空间，则需在此指定附件资源访问地址
     fileDomain: "",
     //标题
-    title: "Erupt Framework",
+    title: "浩奇软件开发技术培训公司",
     //描述
-    desc: "通用数据管理框架",
+    desc: "培训信息管理系统",
     //是否展示版权信息
     copyright: true,
     //自定义版权内容，1.12.8及以上版本支持，值可以是方法也可以是字符串
     copyrightTxt: function() {
-        return "版权信息xxxx"
+        return "229倾情开发"
     },
     //高德地图 api key,使用地图组件须指定此属性，amapKey获取地址：https://lbs.amap.com (服务平台为：Web端(JS API))
     amapKey: "xxxx",
