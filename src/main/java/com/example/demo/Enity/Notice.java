@@ -15,7 +15,7 @@ import xyz.erupt.jpa.model.BaseModel;
 import java.util.Set;
 import java.util.Date;
 
-@Erupt(name = "Notice")
+@Erupt(name = "Notice", power = @Power(importable = true, export = true))
 @Table(name = "Notice")
 @Entity
 public class Notice extends BaseModel {

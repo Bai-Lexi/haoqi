@@ -15,10 +15,21 @@ import xyz.erupt.jpa.model.BaseModel;
 import java.util.Set;
 import java.util.Date;
 
-@Erupt(name = "TeacherInfo")
+@Erupt(name = "TeacherInfo", power = @Power(importable = true, export = true))
 @Table(name = "TeacherInfo")
 @Entity
 public class TeacherInfo extends BaseModel {
+    @EruptField(
+            views = @View(
+                    title = "工号"
+            ),
+            edit = @Edit(
+                    title = "工号",
+                    type = EditType.INPUT, search = @Search, notNull = true,
+                    inputType = @InputType
+            )
+    )
+    private String tid;
 
     @EruptField(
             views = @View(

@@ -10,12 +10,13 @@ import xyz.erupt.annotation.*;
 import xyz.erupt.annotation.sub_erupt.*;
 import xyz.erupt.annotation.sub_field.*;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
+import xyz.erupt.toolkit.handler.SqlChoiceFetchHandler;
 import xyz.erupt.upms.model.base.HyperModel;
 import xyz.erupt.jpa.model.BaseModel;
 import java.util.Set;
 import java.util.Date;
 
-@Erupt(name = "Course")
+@Erupt(name = "Course", power = @Power(importable = true, export = true))
 @Table(name = "Course")
 @Entity
 public class Course extends BaseModel {
@@ -56,20 +57,38 @@ public class Course extends BaseModel {
     )
     private String course_place;
 
+//    @EruptField(
+//            views = @View(
+//                    title = "任课教师"
+//            ),
+//            edit = @Edit(
+//                    title = "任课教师",
+//                    type = EditType.TAB_TABLE_REFER, search = @Search, notNull = true
+//            )
+//    )
+//    @ManyToMany
+//    @JoinTable(name = "course_teacher_info",
+//            joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "teacher_info_id", referencedColumnName = "id"))
+//    private Set<TeacherInfo> course_teacher;
     @EruptField(
             views = @View(
                     title = "任课教师"
             ),
             edit = @Edit(
+                    search = @Search,
                     title = "任课教师",
-                    type = EditType.TAB_TABLE_REFER, search = @Search, notNull = true
+                    type = EditType.CHOICE,  notNull = true,
+                    choiceType = @ChoiceType(
+                            fetchHandler = SqlChoiceFetchHandler.class,
+                            //参数一必填，表示sql语句
+                            //参数二可不填，表示缓存时间，默认为3000毫秒，1.6.10及以上版本支持
+                            fetchHandlerParams = {"select id, tname from teacher_info", "5000"}
+                    )
             )
     )
-    @ManyToMany
-    @JoinTable(name = "course_teacher_info",
-            joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "teacher_info_id", referencedColumnName = "id"))
-    private Set<TeacherInfo> course_teacher;
+    private String course_teacher;
+
 
     @EruptField(
             views = @View(
