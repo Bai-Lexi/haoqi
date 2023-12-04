@@ -18,20 +18,20 @@ window.eruptSiteConfig = {
     //高德地图 SecurityJsCode
     amapSecurityJsCode: "xxxxx",
     //logo路径
-    logoPath: "erupt.svg",
+    logoPath: "./nice.jpg",
     //logo文字
-    logoText: "erupt",
+    logoText: "HaoQi",
     //注册页地址(仅是一个链接，需要自定义实际样式)
     registerPage: "",
     //自定义导航栏按钮，配置后将会出现在页面右上角
-    r_tools: [{
-        text: "自定义功能按钮",
-        icon: "fa-eercast",
-        mobileHidden: true,
-        click: function (event) {
-            alert("Function button");
-        }
-    }],
+    // r_tools: [{
+    //     text: "自定义功能按钮",
+    //     icon: "fa-eercast",
+    //     mobileHidden: true,
+    //     click: function (event) {
+    //         alert("Function button");
+    //     }
+    // }],
     //登录成功事件 1.12.3 及以上版本移动至window.eruptEvent中声明
     login: function(user){
 
