@@ -7,98 +7,90 @@ package com.example.demo.Enity;
 
 import javax.persistence.*;
 
-import com.example.demo.DataProxy.TeacherDataProxy;
 import xyz.erupt.annotation.*;
-import xyz.erupt.annotation.sub_erupt.*;
 import xyz.erupt.annotation.sub_field.*;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
-import xyz.erupt.upms.model.base.HyperModel;
 import xyz.erupt.jpa.model.BaseModel;
-import java.util.Set;
-import java.util.Date;
 
-@Erupt(name = "TeacherInfo", power = @Power(importable = true, export = true),dataProxy = TeacherDataProxy.class)
-@Table(name = "TeacherInfo")
+/*
+ * Copyright © 2020-2035 erupt.xyz All rights reserved.
+ * Author: YuePeng (erupts@126.com)
+ */
+
+@Erupt(name = "InvestigationRecord" )
+@Table(name = "InvestigationRecord")
 @Entity
-public class TeacherInfo extends BaseModel {
-    @EruptField(
-            views = @View(
-                    title = "工号"
-            ),
-            edit = @Edit(
-                    title = "工号",
-                    type = EditType.INPUT, search = @Search, notNull = true,
-                    inputType = @InputType
-            )
-    )
-    private String tid;
-
-    public String getTid() {
-        return tid;
+public class InvestigationRecord extends BaseModel {
+    public String getCourse_score() {
+        return course_score;
     }
 
-    public String getTname() {
-        return tname;
+    public String getTeacher_score() {
+        return teacher_score;
+    }
+
+    public String getNum() {
+        return num;
     }
 
     @EruptField(
             views = @View(
-                    title = "教师姓名"
+                    title = "课程号"
             ),
             edit = @Edit(
-                    title = "教师姓名",
+                    title = "课程号",
                     type = EditType.INPUT, search = @Search, notNull = true,
                     inputType = @InputType
             )
     )
-    private String tname;
+    private String course_id;
 
     @EruptField(
             views = @View(
-                    title = "职称"
+                    title = "课程评价"
             ),
             edit = @Edit(
-                    title = "职称",
+                    title = "课程评价",
                     type = EditType.INPUT, search = @Search, notNull = true,
                     inputType = @InputType
             )
     )
-    private String title;
+    private String course_score;
 
     @EruptField(
             views = @View(
-                    title = "擅长领域"
+                    title = "任课教师"
             ),
             edit = @Edit(
-                    title = "擅长领域",
+                    title = "任课教师",
                     type = EditType.INPUT, search = @Search, notNull = true,
                     inputType = @InputType
             )
     )
-    private String domain;
+    private String teacher;
 
     @EruptField(
             views = @View(
-                    title = "邮箱"
+                    title = "教师评分"
             ),
             edit = @Edit(
-                    title = "邮箱",
+                    title = "教师评分",
                     type = EditType.INPUT, search = @Search, notNull = true,
                     inputType = @InputType
             )
     )
-    private String temail;
+    private String teacher_score;
 
     @EruptField(
             views = @View(
-                    title = "电话"
+                    title = "评教人数"
             ),
             edit = @Edit(
-                    title = "电话",
+                    title = "评教人数",
                     type = EditType.INPUT, search = @Search, notNull = true,
                     inputType = @InputType
             )
     )
-    private String tphone;
+    private String num;
 
 }

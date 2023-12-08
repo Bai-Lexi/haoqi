@@ -6,20 +6,28 @@ package com.example.demo.Enity;
  */
 
 import javax.persistence.*;
+
+import com.example.demo.DataProxy.CourseDataProxy;
 import xyz.erupt.annotation.*;
 import xyz.erupt.annotation.sub_erupt.*;
 import xyz.erupt.annotation.sub_field.*;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.toolkit.handler.SqlChoiceFetchHandler;
-import xyz.erupt.upms.model.base.HyperModel;
 import xyz.erupt.jpa.model.BaseModel;
 import java.util.Set;
 import java.util.Date;
 
-@Erupt(name = "Course", power = @Power(importable = true, export = true))
+@Erupt(name = "Course", power = @Power(importable = true, export = true),dataProxy = CourseDataProxy.class)
 @Table(name = "Course")
 @Entity
 public class Course extends BaseModel {
+    public String getCourse_teacher() {
+        return course_teacher;
+    }
+
+    public String getCourse_id() {
+        return course_id;
+    }
 
     @EruptField(
             views = @View(
@@ -57,7 +65,21 @@ public class Course extends BaseModel {
     )
     private String course_place;
 
-//    @EruptField(
+    @Override
+    public String toString() {
+        return "Course{" +
+                "course_id='" + course_id + '\'' +
+                ", course_time=" + course_time +
+                ", course_place='" + course_place + '\'' +
+                ", course_teacher='" + course_teacher + '\'' +
+                ", course_content='" + course_content + '\'' +
+                ", course_pay=" + course_pay +
+                ", course_client=" + course_client +
+                ", course_students=" + course_students +
+                '}';
+    }
+
+    //    @EruptField(
 //            views = @View(
 //                    title = "任课教师"
 //            ),
@@ -83,7 +105,7 @@ public class Course extends BaseModel {
                             fetchHandler = SqlChoiceFetchHandler.class,
                             //参数一必填，表示sql语句
                             //参数二可不填，表示缓存时间，默认为3000毫秒，1.6.10及以上版本支持
-                            fetchHandlerParams = {"select id, tname from teacher_info", "5000"}
+                            fetchHandlerParams = {"select tid, tname from teacher_info", "5000"}
                     )
             )
     )
@@ -140,7 +162,7 @@ public class Course extends BaseModel {
     )
     @ManyToMany
     @JoinTable(name = "course_student_info",
-            joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"),
+            joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "student_info_id", referencedColumnName = "id"))
     private Set<StudentInfo> course_students;
 }

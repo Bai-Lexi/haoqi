@@ -6,17 +6,16 @@ package com.example.demo.Enity;
  */
 
 import javax.persistence.*;
+
+import com.example.demo.DataProxy.InvestigationDataProxy;
 import xyz.erupt.annotation.*;
 import xyz.erupt.annotation.sub_erupt.*;
 import xyz.erupt.annotation.sub_field.*;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.toolkit.handler.SqlChoiceFetchHandler;
-import xyz.erupt.upms.model.base.HyperModel;
 import xyz.erupt.jpa.model.BaseModel;
-import java.util.Set;
-import java.util.Date;
 
-@Erupt(name = "Investigation", power = @Power(importable = true, export = true))
+@Erupt(name = "Investigation", power = @Power(importable = true, export = true),dataProxy = InvestigationDataProxy.class)
 @Table(name = "Investigation")
 @Entity
 public class Investigation extends BaseModel {
@@ -33,7 +32,7 @@ public class Investigation extends BaseModel {
                             fetchHandler = SqlChoiceFetchHandler.class,
                             //参数一必填，表示sql语句
                             //参数二可不填，表示缓存时间，默认为3000毫秒，1.6.10及以上版本支持
-                            fetchHandlerParams = {"select id, course_id from course", "5000"}
+                            fetchHandlerParams = {"select course_id, course_id from course", "5000"}
                     )
             )
     )
@@ -97,6 +96,18 @@ public class Investigation extends BaseModel {
     )
     private String course_teacher1;
 
+    public Float getRate() {
+        return rate;
+    }
+
+    public Float getScore() {
+        return score;
+    }
+
+    public String getCourse_id() {
+        return course_id;
+    }
+
     @EruptField(
             views = @View(
                     title = "教师评分"
@@ -107,7 +118,7 @@ public class Investigation extends BaseModel {
                     rateType = @RateType(allowHalf = true, count = 10)
             )
     )
-    private Integer score;
+    private Float score;
 
     @EruptField(
             views = @View(

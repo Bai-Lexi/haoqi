@@ -2,7 +2,9 @@ package com.example.demo.Controller;
 
 import com.example.demo.Enity.Investigation;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,5 +23,22 @@ public interface InvestigationRepository extends JpaRepository<Investigation, Lo
     // 查询每门课程的平均评分，包含课程号
     @Query("SELECT course_id, AVG(rate) AS avgRate FROM Investigation GROUP BY course_id")
     List<Object[]> findAverageRateByCourse();
+
+    @Query(value = "SELECT AVG(rate)  FROM Investigation where course_id=?",nativeQuery = true)
+    double findAvgCs(String cid);
+
+    @Query(value = "SELECT AVG(score)  FROM Investigation where course_id=?",nativeQuery = true)
+    double findAvgTs(String cid);
+
+    @Query(value = "SELECT count(*)  FROM Investigation where course_id=?",nativeQuery = true)
+    double findNum(String cid);
+
+    @Transactional
+    @Modifying
+    @Query(value = "delete from investigation where course_id =?",nativeQuery = true)
+    int delInve(String cid);
+
+
+
 }
 

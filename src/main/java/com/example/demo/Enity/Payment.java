@@ -6,8 +6,6 @@ package com.example.demo.Enity;
  */
 
 import javax.persistence.*;
-
-import com.example.demo.DataProxy.TeacherDataProxy;
 import xyz.erupt.annotation.*;
 import xyz.erupt.annotation.sub_erupt.*;
 import xyz.erupt.annotation.sub_field.*;
@@ -17,29 +15,22 @@ import xyz.erupt.jpa.model.BaseModel;
 import java.util.Set;
 import java.util.Date;
 
-@Erupt(name = "TeacherInfo", power = @Power(importable = true, export = true),dataProxy = TeacherDataProxy.class)
-@Table(name = "TeacherInfo")
+@Erupt(name = "Payment")
+@Table(name = "Payment")
 @Entity
-public class TeacherInfo extends BaseModel {
+public class Payment extends BaseModel {
+
     @EruptField(
             views = @View(
-                    title = "工号"
+                    title = "教师编号"
             ),
             edit = @Edit(
-                    title = "工号",
+                    title = "教师编号",
                     type = EditType.INPUT, search = @Search, notNull = true,
                     inputType = @InputType
             )
     )
     private String tid;
-
-    public String getTid() {
-        return tid;
-    }
-
-    public String getTname() {
-        return tname;
-    }
 
     @EruptField(
             views = @View(
@@ -55,50 +46,26 @@ public class TeacherInfo extends BaseModel {
 
     @EruptField(
             views = @View(
-                    title = "职称"
+                    title = "课程数量"
             ),
             edit = @Edit(
-                    title = "职称",
+                    title = "课程数量",
                     type = EditType.INPUT, search = @Search, notNull = true,
                     inputType = @InputType
             )
     )
-    private String title;
+    private String caccount;
 
     @EruptField(
             views = @View(
-                    title = "擅长领域"
+                    title = "总收入"
             ),
             edit = @Edit(
-                    title = "擅长领域",
+                    title = "总收入",
                     type = EditType.INPUT, search = @Search, notNull = true,
                     inputType = @InputType
             )
     )
-    private String domain;
-
-    @EruptField(
-            views = @View(
-                    title = "邮箱"
-            ),
-            edit = @Edit(
-                    title = "邮箱",
-                    type = EditType.INPUT, search = @Search, notNull = true,
-                    inputType = @InputType
-            )
-    )
-    private String temail;
-
-    @EruptField(
-            views = @View(
-                    title = "电话"
-            ),
-            edit = @Edit(
-                    title = "电话",
-                    type = EditType.INPUT, search = @Search, notNull = true,
-                    inputType = @InputType
-            )
-    )
-    private String tphone;
+    private String pay;
 
 }
